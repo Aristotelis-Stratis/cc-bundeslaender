@@ -78,6 +78,28 @@ body {
     font-weight: 600;
 }
 
+.letter-container {
+    display: flex;
+    width: 100%;
+    gap: 5px;
+    margin: 10px;
+}
+
+.letter {
+    background-color: #dddddd;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
 
 @media (max-width:800px) {}
 

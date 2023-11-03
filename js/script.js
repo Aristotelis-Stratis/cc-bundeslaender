@@ -15,17 +15,16 @@ function render() {
         const state = bundeslaender[i];
         const population = (state['population'] + '').replace('.', ',');
         content.innerHTML += generateLink(state, population);
-
     }
 }
 
 function generateLink(state, population) {
     return `
     <a class="state-link" href="${state['url']}">
-    <div class="state-info">
-        <h2>${state['name']}</h2>
-        <span>${population} Millionen</span>
-    </div>
+        <div class="state-info">
+            <h2>${state['name']}</h2>
+            <span>${population} Millionen</span>
+        </div>
     </a>
     `;
 }
