@@ -1,4 +1,5 @@
 let bundeslaender = [];
+let letters = [];
 
 async function init() {
     let response = await fetch('./js/bundesland.json');
@@ -15,7 +16,12 @@ function render() {
         const state = bundeslaender[i];
         const population = (state['population'] + '').replace('.', ',');
         content.innerHTML += generateLink(state, population);
+        const firstLetter = state['name'].charAt(0);
+        if (!letters.includes(firstLetter)) {
+            letters.push(firstLetter);
+        }
     }
+    renderLetters();
 }
 
 function generateLink(state, population) {
@@ -27,4 +33,16 @@ function generateLink(state, population) {
         </div>
     </a>
     `;
+}
+
+function renderLetters() {
+    let letterContent = document.getElementById('letter-container');
+    letterContent.innerHTML = '';
+
+    for (let i = 0; i < letters.length; i++) {
+        const letter = letters[i];
+
+        letterContent.innerHTML += `
+        <div class="letter">${letter}</div>`;
+    }
 }
