@@ -8,20 +8,39 @@ async function init() {
     render();
 }
 
-function render() {
+function render(filter) {
     let content = document.getElementById('main-content');
     content.innerHTML = '';
 
     for (let i = 0; i < bundeslaender.length; i++) {
         const state = bundeslaender[i];
         const population = (state['population'] + '').replace('.', ',');
-        content.innerHTML += generateLink(state, population);
         const firstLetter = state['name'].charAt(0);
+        if (!filter || filter == firstLetter) {
+            content.innerHTML += generateLink(state, population);
+        }
+
         if (!letters.includes(firstLetter)) {
             letters.push(firstLetter);
         }
     }
     renderLetters();
+}
+
+function setFilter(letter) {
+    render(letter);
+}
+
+function renderLetters() {
+    let letterContent = document.getElementById('letter-container');
+    letterContent.innerHTML = '';
+
+    for (let i = 0; i < letters.length; i++) {
+        const letter = letters[i];
+
+        letterContent.innerHTML += `
+        <div onclick="setFilter('${letter}')" class="letter">${letter}</div>`;
+    }
 }
 
 function generateLink(state, population) {
@@ -33,16 +52,4 @@ function generateLink(state, population) {
         </div>
     </a>
     `;
-}
-
-function renderLetters() {
-    let letterContent = document.getElementById('letter-container');
-    letterContent.innerHTML = '';
-
-    for (let i = 0; i < letters.length; i++) {
-        const letter = letters[i];
-
-        letterContent.innerHTML += `
-        <div class="letter">${letter}</div>`;
-    }
 }
